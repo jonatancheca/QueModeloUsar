@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onUnmounted, ref } from 'vue'
-import { ArrowDown, ArrowRight, Check, ChevronRight, Copy, Cpu, PiggyBank, Scale, Sparkles, Volume2, VolumeX, X, Zap } from '@lucide/vue'
+import { ArrowDown, ArrowRight, Ban, Check, ChevronRight, Copy, Cpu, PiggyBank, Scale, Sparkles, Volume2, VolumeX, X, Zap } from '@lucide/vue'
 import RobotMascot from './components/RobotMascot.vue'
 import ModelMascot from './components/ModelMascot.vue'
 import { budgets, getCopyText, getRecommendation, tasks, updatedAt } from './data/recommendations'
@@ -165,12 +165,12 @@ onUnmounted(() => {
         <div class="task-grid">
           <article v-for="(task, index) in tasks" :key="task.id" class="task-card" :class="`card-${task.id}`" :style="{ '--card-index': index }">
             <div class="card-top flex items-center justify-between">
-              <span class="model-avatar"><ModelMascot :key="getRecommendation(task.id, budget).id" :model="getRecommendation(task.id, budget).id" /></span>
+              <span class="model-avatar"><ModelMascot v-if="getRecommendation(task.id, budget).id" :key="getRecommendation(task.id, budget).id!" :model="getRecommendation(task.id, budget).id!" /><Ban v-else :size="28" aria-hidden="true" /></span>
               <span class="card-number">0{{ index + 1 }} /</span>
             </div>
             <h3 class="task-title">{{ task.title }}</h3>
             <Transition name="model" mode="out-in">
-              <div :key="getRecommendation(task.id, budget).id" class="model-choice">
+              <div :key="getRecommendation(task.id, budget).id ?? 'discouraged'" class="model-choice">
                 <span class="model-name">{{ getRecommendation(task.id, budget).name }}</span>
                 <span v-if="getRecommendation(task.id, budget).effort" class="effort-badge"><Zap :size="12" :stroke-width="2" /> MAX effort</span>
               </div>
@@ -205,10 +205,10 @@ onUnmounted(() => {
   <dialog ref="dialog" class="recommendation-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description" @close="handleClose" @click="handleBackdrop" @keydown="handleDialogKeydown">
     <div v-if="activeTask && activeModel" class="dialog-content" :class="`dialog-${activeTask.id}`">
       <div class="dialog-top flex items-center justify-between gap-4">
-        <span class="dialog-eyebrow"><Sparkles :size="15" /> TU MATCH ESTÁ AQUÍ</span>
+        <span class="dialog-eyebrow"><Sparkles :size="15" /> {{ activeModel.id ? 'TU MATCH ESTÁ AQUÍ' : 'NO RECOMENDADO' }}</span>
         <button type="button" class="close-button" aria-label="Cerrar recomendación" autofocus @click="closeTask"><X :size="20" /></button>
       </div>
-      <span class="dialog-model-avatar"><ModelMascot :model="activeModel.id" /></span>
+      <span class="dialog-model-avatar"><ModelMascot v-if="activeModel.id" :model="activeModel.id" /><Ban v-else :size="36" aria-hidden="true" /></span>
       <p class="dialog-task-title">{{ activeTask.title }}</p>
       <h2 id="dialog-title">{{ activeModel.name }}</h2>
       <div class="dialog-badges flex flex-wrap items-center gap-2">
@@ -217,7 +217,7 @@ onUnmounted(() => {
         <span v-if="activeModel.effort" class="effort-badge"><Zap :size="13" /> MAX effort</span>
       </div>
       <p id="dialog-description" class="dialog-description">{{ activeModel.detail }}</p>
-      <div class="example-list"><strong>Úsalo para...</strong><ul><li v-for="example in activeTask.examples" :key="example"><ChevronRight :size="14" /> {{ example }}</li></ul></div>
+      <div v-if="activeModel.id" class="example-list"><strong>Úsalo para...</strong><ul><li v-for="example in activeTask.examples" :key="example"><ChevronRight :size="14" /> {{ example }}</li></ul></div>
       <p class="dialog-note">{{ activeTask.note }}</p>
       <button class="copy-button flex items-center justify-center gap-2" type="button" @click="copyRecommendation"><component :is="copyState === 'copied' ? Check : Copy" :size="18" /> {{ copyState === 'copied' ? '¡Copiado! A crear.' : 'Copiar recomendación' }}</button>
       <p class="copy-feedback" role="status">{{ copyState === 'failed' ? 'No se pudo copiar. Puedes seleccionar el nombre del modelo.' : copyState === 'copied' ? 'Recomendación copiada al portapapeles.' : '' }}</p>

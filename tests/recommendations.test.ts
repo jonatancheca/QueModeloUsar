@@ -3,8 +3,8 @@ import assert from 'node:assert/strict'
 import { budgets, getCopyText, getRecommendation, tasks } from '../src/data/recommendations.ts'
 
 const expected = {
-  computer: ['astra', 'astra', 'astra'],
-  audiovisual: ['opus', 'opus', 'opus'],
+  computer: ['astra', 'astra', null],
+  audiovisual: ['opus', 'opus', 'sol'],
   architecture: ['sol', 'opus', 'sol'],
   coding: ['sol', 'opus', 'luna'],
   routine: ['luna', 'luna', 'luna'],
@@ -12,7 +12,7 @@ const expected = {
 
 for (const task of tasks) {
   budgets.forEach((budget, index) => {
-    test(`${task.id}: ${budget.id} returns the configured model`, () => {
+    test(`${task.id}: ${budget.id} returns the configured recommendation`, () => {
       const recommendation = getRecommendation(task.id, budget.id)
       assert.equal(recommendation.id, expected[task.id][index])
       assert.ok(recommendation.name)

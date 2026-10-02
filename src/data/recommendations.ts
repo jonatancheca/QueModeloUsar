@@ -21,7 +21,7 @@ export const models: Record<ModelId, { name: string; provider: string; effort?: 
   },
   sol: {
     name: 'Sol 6.1', provider: 'OpenAI',
-    detail: 'La elección de esta guía para equilibrar coste y resultado en arquitectura y programación.',
+    detail: 'La elección de esta guía para equilibrar coste y resultado en arquitectura y programación, y para contenido audiovisual en modo ahorro.',
   },
   luna: {
     name: 'Luna 6.1', provider: 'OpenAI', effort: 'MAX effort',
@@ -38,14 +38,14 @@ export const tasks: {
     description: 'Navegar, hacer clic y dejar que la IA se encargue.',
     examples: ['Manejar un navegador', 'Rellenar formularios', 'Automatizar una interfaz'],
     choices: { balanced: 'astra' },
-    note: 'Esta guía mantiene GPT 6 Astra para esta tarea en los tres presupuestos.',
+    note: 'Para esta tarea, usa GPT 6 Astra en Equilibrado o Sin límites.',
   },
   {
     id: 'audiovisual', title: 'Contenido audiovisual',
     description: 'Ideas, guiones y contenido que se ve y se escucha.',
     examples: ['Preparar un guion', 'Desarrollar una pieza audiovisual', 'Trabajar una dirección creativa'],
-    choices: { balanced: 'opus' },
-    note: 'Esta guía mantiene Opus 5.5 para esta tarea en los tres presupuestos.',
+    choices: { balanced: 'opus', cheap: 'sol' },
+    note: 'En modo ahorro, usa Sol 6.1. En Equilibrado y Sin límites, usa Opus 5.5.',
   },
   {
     id: 'architecture', title: 'Pensar la arquitectura',
@@ -73,6 +73,13 @@ export const tasks: {
 export function getRecommendation(taskId: TaskId, budget: Budget) {
   const task = tasks.find((item) => item.id === taskId)
   if (!task) throw new Error(`Unknown task: ${taskId}`)
+  if (taskId === 'computer' && budget === 'cheap') {
+    return {
+      id: null, name: 'ni se te ocurra', provider: 'No recomendado', effort: undefined,
+      detail: 'Para automatizar una interfaz, cambia a Equilibrado o Sin límites.',
+      usesFallback: false,
+    }
+  }
   const modelId = task.choices[budget] ?? task.choices.balanced!
   return { ...models[modelId], id: modelId, usesFallback: !task.choices[budget] && budget !== 'balanced' }
 }
@@ -81,5 +88,5 @@ export function getCopyText(taskId: TaskId, budget: Budget) {
   const task = tasks.find((item) => item.id === taskId)!
   const recommendation = getRecommendation(taskId, budget)
   const budgetName = budgets.find((item) => item.id === budget)!.title
-  return `${task.title}\nPresupuesto: ${budgetName}\nModelo: ${recommendation.name}${recommendation.effort ? ` · ${recommendation.effort}` : ''}\nSelección editorial: ${updatedAt}`
+  return `${task.title}\nPresupuesto: ${budgetName}\n${recommendation.id ? 'Modelo' : 'Recomendación'}: ${recommendation.name}${recommendation.effort ? ` · ${recommendation.effort}` : ''}\nSelección editorial: ${updatedAt}`
 }

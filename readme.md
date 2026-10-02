@@ -9,7 +9,7 @@ pnpm install
 pnpm dev
 ```
 
-Abre http://localhost:3000. El puerto es fijo: si está ocupado, Vite avisa en lugar de arrancar en otro puerto.
+Abre http://localhost:3005. El puerto es fijo: si está ocupado, Vite avisa en lugar de arrancar en otro puerto.
 
 ## Comprobaciones y publicación
 
@@ -34,7 +34,7 @@ Referencias: [Vue en Pages](https://developers.cloudflare.com/pages/framework-gu
 
 ## Cambiar las recomendaciones
 
-Edita `src/data/recommendations.ts`: ahí están los modelos, las cinco tareas, las tres opciones de presupuesto y la fecha de la selección editorial. Los modelos son los indicados para esta versión, no un ranking consultado en tiempo real. Si una tarea no tiene una elección específica para un presupuesto, se conserva su opción equilibrada. Luna 6.1 siempre muestra MAX effort.
+Edita `src/data/recommendations.ts`: ahí están los modelos, las cinco tareas, las tres opciones de presupuesto y la fecha de la selección editorial. Los modelos son los indicados para esta versión, no un ranking consultado en tiempo real. Si una tarea no tiene una elección específica para un presupuesto, se conserva su opción equilibrada. Luna 6.1 siempre muestra MAX effort. Para usar la computadora en modo ahorro, la guía muestra «ni se te ocurra» sin recomendar un modelo.
 
 La interfaz recuerda presupuesto y sonido en el navegador. Los sonidos son notas cortas generadas con Web Audio y están desactivados inicialmente. La web sigue funcionando si el navegador no permite almacenamiento, sonido o portapapeles. Incluye navegación por teclado, diálogo con foco contenido y soporte de movimiento reducido.
 
