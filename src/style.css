@@ -67,6 +67,8 @@ h1 { position: relative; width: fit-content; margin: 0; font-family: var(--font-
 .mascot-caption { position: absolute; bottom: 0; width: 100%; text-align: center; font-size: 10px; font-weight: 600; letter-spacing: .25px; color: #787971; }
 .robot-float { animation: robot-float 4s ease-in-out infinite; }
 .robot-shell { transition: fill .3s; }
+.robot-outfit { animation: outfit-appear .25s ease-out backwards; }
+.savings-coin { transform-origin: 313px 88px; animation: coin-wiggle 4s ease-in-out infinite; }
 .robot-eyes { transform-box: fill-box; transform-origin: center; animation: blink 6s infinite; }
 .robot-wave { transform-origin: 276px 149px; animation: robot-wave 6s ease-in-out infinite; }
 .orbit-star { transform-origin: 54px 88px; animation: spark-turn 9s ease-in-out infinite; }
@@ -165,6 +167,8 @@ h1 { position: relative; width: fit-content; margin: 0; font-family: var(--font-
 .copy-button:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
 .copy-feedback { min-height: 18px; margin-top: 9px; text-align: center; font-size: 9px; color: #616258; }
 
+@keyframes outfit-appear { from { opacity: 0; translate: 0 -6px; } to { opacity: 1; translate: 0 0; } }
+@keyframes coin-wiggle { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
 @keyframes robot-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 @keyframes blink { 0%,43%,47%,100% { transform: scaleY(1); } 45% { transform: scaleY(.12); } }
 @keyframes robot-wave { 0%,70%,100% { transform: rotate(0deg); } 76%,88% { transform: rotate(12deg); } 82%,94% { transform: rotate(-7deg); } }
