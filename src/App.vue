@@ -120,7 +120,7 @@ onUnmounted(() => {
         <span>qué modelo<span class="brand-end"> usar.</span></span>
       </a>
       <div class="header-actions flex items-center gap-5">
-        <span class="update-label"><span class="status-dot"></span> AL DÍA · 02 OCT 2026</span>
+        <span class="update-label"><span class="status-dot"></span> AL DÍA · 09 OCT 2026</span>
         <button class="sound-toggle flex items-center gap-2" type="button" :aria-pressed="soundEnabled" :aria-label="soundEnabled ? 'Desactivar sonido' : 'Activar sonido'" :disabled="soundUnavailable" @click="toggleSound">
           <component :is="soundEnabled ? Volume2 : VolumeX" :size="17" :stroke-width="1.8" />
           <span>Sonido <strong>{{ soundUnavailable ? 'N/D' : soundEnabled ? 'ON' : 'OFF' }}</strong></span>
@@ -194,7 +194,7 @@ onUnmounted(() => {
 
     <footer class="site-footer flex items-start justify-between gap-4">
       <p>Menos comparar. <strong>Más crear.</strong></p>
-      <div class="footer-meta"><span>Selección editorial · <time :datetime="updatedAt">02 oct 2026</time></span><span>Guía estática. Los modelos cambian; las buenas preguntas, no.</span></div>
+      <div class="footer-meta"><span>Selección editorial · <time :datetime="updatedAt">09 oct 2026</time></span><span>Guía estática. Los modelos cambian; las buenas preguntas, no.</span></div>
     </footer>
 
     <div v-if="celebrating" :key="confettiKey" class="confetti" aria-hidden="true">

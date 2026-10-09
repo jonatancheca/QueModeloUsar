@@ -310,7 +310,6 @@ h1 { position: relative; width: fit-content; margin: 0; font-family: var(--font-
 .task-card:hover .mascot-body { animation: mascot-bounce .7s ease-in-out infinite; }
 .task-card:focus-within .mascot-body { animation: mascot-bounce .7s ease-in-out infinite; }
 .mascot-sol .sun-rays { transform-origin: 32px 32px; animation: sun-wiggle 8s ease-in-out infinite; }
-.moon-star { transform-box: fill-box; transform-origin: center; animation: spark-turn 8s ease-in-out infinite; }
 @keyframes mascot-bounce { 0%,100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-3px) rotate(-5deg); } 70% { transform: translateY(-1px) rotate(5deg); } }
 @keyframes sun-wiggle { 0%,100% { transform: rotate(0); } 50% { transform: rotate(15deg); } }
 @media (prefers-reduced-motion: reduce) { .model-mascot * { animation: none !important; } }

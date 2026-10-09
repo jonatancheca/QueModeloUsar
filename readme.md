@@ -34,7 +34,7 @@ La vista de escritorio reúne el selector de presupuesto y las cinco tareas en u
 
 ### Sobre las recomendaciones
 
-La selección es editorial y está fechada en la propia web; la versión actual corresponde al **2 de octubre de 2026**. No consulta rankings ni precios en tiempo real, ni ejecuta los modelos: te ayuda a decidir con cuál trabajar. Las capturas reflejan esa selección.
+La selección es editorial y está fechada en la propia web; la versión actual corresponde al **9 de octubre de 2026**. No consulta rankings ni precios en tiempo real, ni ejecuta los modelos: te ayuda a decidir con cuál trabajar. Las capturas reflejan esa selección.
 
 ## Desarrollo
 
@@ -82,7 +82,7 @@ Abre [http://127.0.0.1:3005](http://127.0.0.1:3005). El puerto es fijo: si está
 Al editar las recomendaciones, conserva estas reglas o actualiza también sus pruebas:
 
 - Si una tarea no tiene una elección específica para un presupuesto, se mantiene su opción equilibrada.
-- Luna 6.1 siempre muestra `MAX effort`.
+- Haiku 5.5 de Anthropic se recomienda para Picar código en Modo ahorro y Una tarea rapidita en los tres presupuestos.
 - Usar la computadora en Modo ahorro muestra «ni se te ocurra», sin recomendar un modelo ni mostrar ejemplos.
 
 Actualiza también la fecha visible en `src/App.vue` cuando cambies la fecha editorial de los datos.

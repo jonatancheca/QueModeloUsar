@@ -1,8 +1,8 @@
 export type Budget = 'balanced' | 'unlimited' | 'cheap'
 export type TaskId = 'computer' | 'audiovisual' | 'architecture' | 'coding' | 'routine'
-export type ModelId = 'astra' | 'opus' | 'sol' | 'luna'
+export type ModelId = 'astra' | 'opus' | 'sol' | 'haiku'
 
-export const updatedAt = '2026-10-02'
+export const updatedAt = '2026-10-09'
 
 export const budgets: { id: Budget; title: string; subtitle: string; icon: string }[] = [
   { id: 'balanced', title: 'Equilibrado', subtitle: 'El mejor coste / beneficio', icon: 'scale' },
@@ -23,9 +23,9 @@ export const models: Record<ModelId, { name: string; provider: string; effort?: 
     name: 'Sol 6.1', provider: 'OpenAI',
     detail: 'La elección de esta guía para equilibrar coste y resultado en arquitectura y programación, y para contenido audiovisual en modo ahorro.',
   },
-  luna: {
-    name: 'Luna 6.1', provider: 'OpenAI', effort: 'MAX effort',
-    detail: 'La elección de esta guía para tareas sencillas y para programar con un presupuesto ajustado. Configura el esfuerzo en MAX.',
+  haiku: {
+    name: 'Haiku 5.5', provider: 'Anthropic',
+    detail: 'La elección de esta guía para tareas sencillas y para programar con un presupuesto ajustado.',
   },
 }
 
@@ -58,15 +58,15 @@ export const tasks: {
     id: 'coding', title: 'Picar código',
     description: 'De la idea al código. Y del bug al «ya funciona».',
     examples: ['Construir una función', 'Resolver un bug', 'Refactorizar código'],
-    choices: { balanced: 'sol', unlimited: 'opus', cheap: 'luna' },
-    note: 'En modo ahorro, usa Luna 6.1 con MAX effort.',
+    choices: { balanced: 'sol', unlimited: 'opus', cheap: 'haiku' },
+    note: 'En modo ahorro, usa Haiku 5.5 de Anthropic.',
   },
   {
     id: 'routine', title: 'Una tarea rapidita',
     description: 'Un commit, un pequeño cambio, un trámite. Hecho.',
     examples: ['Preparar un commit', 'Renombrar algo', 'Hacer un cambio sencillo'],
-    choices: { balanced: 'luna' },
-    note: 'Luna 6.1 con MAX effort en los tres presupuestos.',
+    choices: { balanced: 'haiku' },
+    note: 'Haiku 5.5 de Anthropic en los tres presupuestos.',
   },
 ]
 

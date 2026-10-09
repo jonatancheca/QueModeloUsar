@@ -6,8 +6,8 @@ const expected = {
   computer: ['astra', 'astra', null],
   audiovisual: ['opus', 'opus', 'sol'],
   architecture: ['sol', 'opus', 'sol'],
-  coding: ['sol', 'opus', 'luna'],
-  routine: ['luna', 'luna', 'luna'],
+  coding: ['sol', 'opus', 'haiku'],
+  routine: ['haiku', 'haiku', 'haiku'],
 } as const
 
 for (const task of tasks) {
@@ -16,7 +16,11 @@ for (const task of tasks) {
       const recommendation = getRecommendation(task.id, budget.id)
       assert.equal(recommendation.id, expected[task.id][index])
       assert.ok(recommendation.name)
-      if (recommendation.id === 'luna') assert.equal(recommendation.effort, 'MAX effort')
+      if (recommendation.id === 'haiku') {
+        assert.equal(recommendation.name, 'Haiku 5.5')
+        assert.equal(recommendation.provider, 'Anthropic')
+        assert.equal(recommendation.effort, undefined)
+      }
     })
   })
 }
@@ -26,8 +30,9 @@ test('missing cheap architecture choice explicitly falls back to Sol', () => {
   assert.equal(getRecommendation('coding', 'cheap').usesFallback, false)
 })
 
-test('copy text preserves MAX effort and the selected budget', () => {
+test('copy text names Haiku and preserves the selected budget', () => {
   const text = getCopyText('coding', 'cheap')
-  assert.ok(text.includes('Luna 6.1 · MAX effort'))
+  assert.ok(text.includes('Modelo: Haiku 5.5'))
+  assert.ok(!text.includes('MAX effort'))
   assert.ok(text.includes('Modo ahorro'))
 })
